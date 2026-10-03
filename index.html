@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vesperlume — Portrait and wedding photography, Bengaluru</title>
+<meta name="description" content="Vesperlume is a portrait and wedding photography studio in Bengaluru, working in available light.">
+
+<meta property="og:title" content="Vesperlume">
+<meta property="og:description" content="Portrait and wedding photography, Bengaluru.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F4F4F2;
+  --ink:#15171A;
+  --ink-soft:#5B6067;
+  --ink-faint:#8E9299;
+  --rule:#DCDDD9;
+  --deep:#1A1D20;
+
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans:"Jost", "Helvetica Neue", Arial, sans-serif;
+
+  --gutter:clamp(1.5rem, 5vw, 5rem);
+  --measure:62ch;
+
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top, 0px);
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:calc(5rem + env(safe-area-inset-top,0px))}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:1rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+
+:focus-visible{
+  outline:2px solid var(--ink);
+  outline-offset:3px;
+}
+
+.skip{
+  position:absolute; left:-9999px;
+  background:var(--ink); color:var(--paper);
+  padding:.75rem 1.25rem; z-index:100;
+}
+.skip:focus{left:var(--gutter); top:1rem}
+
+/* ── Navigation ───────────────────────────────── */
+.nav{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:50;
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:2rem;
+  padding:1.6rem var(--gutter);
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease;
+}
+.nav.is-scrolled{border-bottom-color:var(--rule)}
+
+.wordmark{
+  font-family:var(--serif);
+  font-size:1.45rem;
+  letter-spacing:.02em;
+  text-decoration:none;
+  line-height:1;
+}
+.nav-links{
+  display:flex; gap:2rem;
+  font-size:.82rem;
+  letter-spacing:.06em;
+}
+.nav-links a{
+  text-decoration:none;
+  color:var(--ink-soft);
+  padding-bottom:2px;
+  border-bottom:1px solid transparent;
+  transition:color .25s ease, border-color .25s ease;
+}
+.nav-links a:hover{color:var(--ink); border-bottom-color:var(--ink)}
+
+/* ── Hero ─────────────────────────────────────── */
+.hero{
+  padding:clamp(5rem, 16vh, 11rem) var(--gutter) clamp(4rem, 10vh, 7rem);
+  max-width:1400px;
+}
+.hero h1{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(3rem, 11vw, 8.5rem);
+  line-height:.94;
+  letter-spacing:-.025em;
+  margin:0 0 2.5rem;
+  max-width:16ch;
+}
+.hero h1 em{font-style:italic}
+
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:.6rem 2.5rem;
+  font-size:.95rem;
+  color:var(--ink-soft);
+  max-width:var(--measure);
+}
+.hero-meta p{margin:0}
+
+/* page-load reveal — the only non-interactive motion on the page */
+.reveal{opacity:0; transform:translateY(14px)}
+.loaded .reveal{
+  opacity:1; transform:none;
+  transition:opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);
+}
+.loaded .reveal:nth-child(2){transition-delay:.12s}
+
+/* ── Gallery ──────────────────────────────────── */
+.work{padding:0 var(--gutter) clamp(5rem,12vh,9rem)}
+
+.plate{margin:0 0 clamp(3rem,7vw,6rem)}
+/* asymmetric arrangement — prints hung at varying scale */
+.row{display:grid; gap:clamp(1.25rem,3vw,2.5rem); margin-bottom:clamp(3rem,7vw,6rem)}
+.row-a{grid-template-columns:1fr}
+.row-b{grid-template-columns:1fr}
+.row-c{grid-template-columns:1fr}
+
+@media (min-width:760px){
+  .row-a{grid-template-columns:7fr 5fr; align-items:end}
+  .row-b{grid-template-columns:4fr 7fr; align-items:start}
+  .row-b .plate:first-child{padding-top:clamp(2rem,6vw,5rem)}
+  .row-c{grid-template-columns:1fr 1fr 1fr}
+}
+.row .plate{margin-bottom:0}
+
+.frame{
+  position:relative;
+  overflow:hidden;
+  background:#E6E7E4;
+}
+.frame img{width:100%; height:100%; object-fit:cover}
+.r-portrait{aspect-ratio:4/5}
+.r-landscape{aspect-ratio:3/2}
+.r-square{aspect-ratio:1/1}
+.r-tall{aspect-ratio:2/3}
+
+/* ── Section headings ─────────────────────────── */
+.band{padding:clamp(5rem,12vh,9rem) var(--gutter)}
+.band-dark{background:var(--deep); color:var(--paper)}
+.band-dark .lede{color:#B9BDC2}
+
+h2{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.08;
+  letter-spacing:-.015em;
+  margin:0 0 1.8rem;
+  max-width:18ch;
+}
+.lede{
+  max-width:var(--measure);
+  font-size:1.08rem;
+  line-height:1.75;
+  color:var(--ink-soft);
+  margin:0 0 1.3rem;
+}
+.lede:last-child{margin-bottom:0}
+
+.about-grid{display:grid; gap:clamp(2.5rem,6vw,5rem); max-width:1250px}
+@media (min-width:860px){
+  .about-grid{grid-template-columns:5fr 6fr; align-items:center}
+}
+
+/* ── Offerings (hanging list, not cards) ──────── */
+.offer{
+  border-top:1px solid var(--rule);
+  padding:2rem 0;
+  display:grid;
+  gap:.6rem 3rem;
+  max-width:1100px;
+}
+@media (min-width:760px){
+  .offer{grid-template-columns:13rem 1fr}
+}
+.offer:last-of-type{border-bottom:1px solid var(--rule)}
+.offer h3{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:1.5rem;
+  line-height:1.2;
+  margin:0;
+}
+.offer p{margin:0; color:var(--ink-soft); max-width:54ch}
+.offer .price{
+  display:block;
+  margin-top:.5rem;
+  font-size:.85rem;
+  color:var(--ink-faint);
+  letter-spacing:.04em;
+}
+
+/* ── Contact ──────────────────────────────────── */
+.contact-rows{margin-top:2.5rem; max-width:40rem}
+.crow{
+  display:flex; flex-wrap:wrap; gap:.4rem 2rem;
+  padding:1.1rem 0;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.crow:first-child{border-top:1px solid rgba(255,255,255,.14)}
+.crow dt{width:7rem; color:#8D9298; font-size:.88rem; margin:0}
+.crow dd{margin:0; flex:1; min-width:14rem}
+.crow a{
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  padding-bottom:1px;
+  transition:border-color .25s ease;
+}
+.crow a:hover{border-bottom-color:var(--paper)}
+
+/* ── Footer ───────────────────────────────────── */
+.foot{
+  padding:2.5rem var(--gutter);
+  display:flex; flex-wrap:wrap; gap:.75rem 2rem;
+  justify-content:space-between;
+  font-size:.8rem;
+  color:var(--ink-faint);
+  border-top:1px solid var(--rule);
+}
+.foot p{margin:0}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" id="nav">
+  <a class="wordmark" href="#top">Vesperlume</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#studio">Studio</a>
+    <a href="#commissions">Commissions</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ══ HERO ══ -->
+  <header class="hero" id="top">
+    <h1 class="reveal">The hour before <em>the light goes.</em></h1>
+    <div class="hero-meta reveal">
+      <p>Portrait and wedding photography, Bengaluru.</p>
+      <p>A small team working in available light.</p>
+    </div>
+  </header>
+
+  <!-- ══ WORK ══
+
+       Images currently load from picsum.photos — free, no attribution,
+       no account. They are real photographs but random subject matter,
+       so they are for layout only.
+
+       To use your own: put files in /images and change each src back to
+       src="images/01.jpg" etc. Keep the aspect-ratio class on .frame.
+  -->
+  <section class="work" id="work">
+
+    <div class="row row-a">
+      <figure class="plate">
+        <div class="frame r-landscape">
+          <img src="https://picsum.photos/seed/vl-ceremony/1500/1000" alt="Bride and her sister in the minutes before the ceremony, Bengaluru" loading="eager" width="1500" height="1000">
+        </div>
+      </figure>
+      <figure class="plate">
+        <div class="frame r-portrait">
+          <img src="https://picsum.photos/seed/vl-dancer/1200/1500" alt="Portrait of a dancer lit by a single window" loading="lazy" width="1200" height="1500">
+        </div>
+      </figure>
+    </div>
+
+    <div class="row row-b">
+      <figure class="plate">
+        <div class="frame r-tall">
+          <img src="https://picsum.photos/seed/vl-doorway/1000/1500" alt="Guest waiting in a doorway during a mehendi ceremony" loading="lazy" width="1000" height="1500">
+        </div>
+      </figure>
+      <figure class="plate">
+        <div class="frame r-landscape">
+          <img src="https://picsum.photos/seed/vl-courtyard/1500/1000" alt="Wedding party crossing a courtyard at dusk" loading="lazy" width="1500" height="1000">
+        </div>
+      </figure>
+    </div>
+
+    <div class="row row-c">
+      <figure class="plate">
+        <div class="frame r-square">
+          <img src="https://picsum.photos/seed/vl-rings/1200/1200" alt="Hands exchanging rings, photographed close" loading="lazy" width="1200" height="1200">
+        </div>
+      </figure>
+      <figure class="plate">
+        <div class="frame r-square">
+          <img src="https://picsum.photos/seed/vl-child/1200/1200" alt="Child asleep against a grandparent during the reception" loading="lazy" width="1200" height="1200">
+        </div>
+      </figure>
+      <figure class="plate">
+        <div class="frame r-square">
+          <img src="https://picsum.photos/seed/vl-petals/1200/1200" alt="Empty chairs and spilled petals after the ceremony" loading="lazy" width="1200" height="1200">
+        </div>
+      </figure>
+    </div>
+
+  </section>
+
+  <!-- ══ STUDIO ══ -->
+  <section class="band" id="studio">
+    <div class="about-grid">
+      <figure class="plate" style="margin:0">
+        <div class="frame r-portrait">
+          <img src="https://picsum.photos/seed/vl-studio/1200/1500" alt="Photographer at work" loading="lazy" width="1200" height="1500">
+        </div>
+      </figure>
+      <div>
+        <h2>We photograph what is already happening.</h2>
+        <p class="lede">Vesperlume is a small team of photographers who have spent years learning to disappear into a room. We work in whatever light is already there — a window, a doorway, the last half hour of sun — and we don't ask anyone to stand anywhere.</p>
+        <p class="lede">Between us we've photographed more than four hundred weddings, and the thing we keep relearning is that the picture people frame is almost never the one they asked for. So we watch for it instead.</p>
+        <p class="lede">Portraits are covered by one photographer. Weddings bring two, sometimes three. Film on request.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COMMISSIONS ══ -->
+  <section class="band" id="commissions" style="padding-top:0">
+    <h2>Commissions</h2>
+    <p class="lede" style="margin-bottom:3rem">Every booking includes a conversation before the shoot, the full edited set delivered within four weeks, and print files at full resolution.</p>
+
+    <div class="offer">
+      <h3>Weddings</h3>
+      <div>
+        <p>Full-day coverage from getting ready to the last of the dancing, with a second photographer. Usually 600–900 edited frames.</p>
+        <span class="price">From ₹1,40,000</span>
+      </div>
+    </div>
+
+    <div class="offer">
+      <h3>Portraits</h3>
+      <div>
+        <p>Two hours, one or two locations, no studio unless you want one. For individuals, couples, and families who would rather not be arranged.</p>
+        <span class="price">From ₹18,000</span>
+      </div>
+    </div>
+
+    <div class="offer">
+      <h3>Editorial</h3>
+      <div>
+        <p>Commissioned work for publications, brands, and founders. Day rate, with licensing agreed in advance.</p>
+        <span class="price">On enquiry</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section class="band band-dark" id="contact">
+    <h2>Tell us about the day.</h2>
+    <p class="lede">Dates, the place, and anything you're worried about. We reply to everything within two days, including the ones we can't take.</p>
+
+    <dl class="contact-rows">
+      <div class="crow">
+        <dt>Email</dt>
+        <dd><a href="mailto:dngh38@gmail.com">dngh38@gmail.com</a></dd>
+      </div>
+      <div class="crow">
+        <dt>Instagram</dt>
+        <dd><a href="https://instagram.com/vesper_lume" rel="me noopener">@vesper_lume</a></dd>
+      </div>
+      <div class="crow">
+        <dt>Based in</dt>
+        <dd>Bengaluru. Travelling for work, always.</dd>
+      </div>
+    </dl>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p>Vesperlume Studio</p>
+  <p>All photographs © Vesperlume. Please don't reuse them.</p>
+</footer>
+
+<script>
+  document.body.classList.add('loaded');
+  var nav = document.getElementById('nav');
+  var onScroll = function(){
+    nav.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+</script>
+
+</body>
+</html>
